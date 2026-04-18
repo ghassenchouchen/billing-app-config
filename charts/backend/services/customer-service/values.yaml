@@ -1,0 +1,6 @@
+name: customer-service
+port: 8081
+image:
+  repository: 005988778995.dkr.ecr.us-east-1.amazonaws.com/billing/customer-service
+  tag: "latest"
+extraEnv: []

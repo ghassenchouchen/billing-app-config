@@ -1,0 +1,6 @@
+name: api-gateway
+port: 8090
+image:
+  repository: 005988778995.dkr.ecr.us-east-1.amazonaws.com/billing/api-gateway
+  tag: "latest"
+extraEnv: []

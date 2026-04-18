@@ -1,0 +1,6 @@
+name: boutique-service
+port: 8088
+image:
+  repository: 005988778995.dkr.ecr.us-east-1.amazonaws.com/billing/boutique-service
+  tag: "latest"
+extraEnv: []

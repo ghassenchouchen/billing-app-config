@@ -1,0 +1,6 @@
+name: subscription-service
+port: 8083
+image:
+  repository: 005988778995.dkr.ecr.us-east-1.amazonaws.com/billing/subscription-service
+  tag: "latest"
+extraEnv: []

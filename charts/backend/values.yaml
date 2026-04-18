@@ -1,0 +1,36 @@
+# Default values shared by all backend services
+# These are overridden by each service's values.yaml
+
+namespace: billing-prod
+
+# Database connection (AWS RDS in prod) will be set up later 
+dbHost: billing-db.cajugww62s1l.us-east-1.rds.amazonaws.com
+dbPort: 3306
+dbUsername: root
+
+# Probes (shared across all Spring Boot services)
+probes:
+  readiness:
+    initialDelaySeconds: 90
+    periodSeconds: 20
+    failureThreshold: 10
+  liveness:
+    initialDelaySeconds: 120
+    periodSeconds: 20
+    failureThreshold: 10
+
+# Default resources
+resources:
+  requests:
+    memory: "256Mi"
+    cpu: "200m"
+  limits:
+    memory: "512Mi"
+    cpu: "500m"
+
+# Default image settings
+image:
+  pullPolicy: Always
+  tag: "latest"
+
+replicaCount: 1

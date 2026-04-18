@@ -1,0 +1,39 @@
+# Production ConfigMap — shared environment config for all microservices
+# Update the RDS endpoint, Kafka bootstrap, and service URLs when infrastructure is provisioned
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: billing-config
+  namespace: billing-prod
+  labels:
+    environment: prod
+data:
+  DB_HOST: "billing-db.cajugww62s1l.us-east-1.rds.amazonaws.com"
+  DB_PORT: "3306"
+  DB_USERNAME: "root"
+  SPRING_DATASOURCE_OPTIONS: "createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC"
+  
+  # DATASOURCES
+  AUTH_DATASOURCE_URL: "jdbc:mysql://billing-db.cajugww62s1l.us-east-1.rds.amazonaws.com:3306/db_authentication?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false"
+  CUSTOMER_DATASOURCE_URL: "jdbc:mysql://billing-db.cajugww62s1l.us-east-1.rds.amazonaws.com:3306/db_customer?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false"
+  CATALOG_DATASOURCE_URL: "jdbc:mysql://billing-db.cajugww62s1l.us-east-1.rds.amazonaws.com:3306/db_catalog?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false"
+  BOUTIQUE_DATASOURCE_URL: "jdbc:mysql://billing-db.cajugww62s1l.us-east-1.rds.amazonaws.com:3306/db_boutique?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false"
+  SUBSCRIPTION_DATASOURCE_URL: "jdbc:mysql://billing-db.cajugww62s1l.us-east-1.rds.amazonaws.com:3306/db_subscription?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false"
+  USAGE_DATASOURCE_URL: "jdbc:mysql://billing-db.cajugww62s1l.us-east-1.rds.amazonaws.com:3306/db_usage?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false"
+  BILLING_DATASOURCE_URL: "jdbc:mysql://billing-db.cajugww62s1l.us-east-1.rds.amazonaws.com:3306/db_billing?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false"
+
+  # KAFKA (update with MSK or Bitnami endpoint)
+  KAFKA_BOOTSTRAP_SERVERS: "kafka.billing-prod.svc.cluster.local:29092"
+  SIM_LIFECYCLE_TOPIC: "boutique.sim.lifecycle"
+
+  # MICROSERVICES (internal cluster DNS)
+  AUTH_SERVICE_URL: "http://authentication-service.billing-prod.svc.cluster.local:8087"
+  CUSTOMER_SERVICE_URL: "http://customer-service.billing-prod.svc.cluster.local:8081"
+  CATALOG_SERVICE_URL: "http://catalog-service.billing-prod.svc.cluster.local:8082"
+  SUBSCRIPTION_SERVICE_URL: "http://subscription-service.billing-prod.svc.cluster.local:8083"
+  USAGE_SERVICE_URL: "http://usage-service.billing-prod.svc.cluster.local:8084"
+  BILLING_SERVICE_URL: "http://billing-service.billing-prod.svc.cluster.local:8085"
+  BOUTIQUE_SERVICE_URL: "http://boutique-service.billing-prod.svc.cluster.local:8088"
+
+  SPRING_PROFILES_ACTIVE: "prod"
+  SERVER_SHUTDOWN: "graceful"

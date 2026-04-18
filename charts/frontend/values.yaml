@@ -2,7 +2,7 @@ namespace: billing-prod
 replicaCount: 2
 
 image:
-  repository: ACCOUNT_ID.dkr.ecr.eu-west-3.amazonaws.com/billing/frontend
+  repository: 005988778995.dkr.ecr.us-east-1.amazonaws.com/billing/frontend
   tag: "latest"
   pullPolicy: Always
 

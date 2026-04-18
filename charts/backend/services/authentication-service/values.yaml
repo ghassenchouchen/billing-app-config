@@ -1,0 +1,6 @@
+name: authentication-service
+port: 8087
+image:
+  repository: 005988778995.dkr.ecr.us-east-1.amazonaws.com/billing/authentication-service
+  tag: "latest"
+extraEnv: []

@@ -1,0 +1,6 @@
+name: billing-service
+port: 8085
+image:
+  repository: 005988778995.dkr.ecr.us-east-1.amazonaws.com/billing/billing-service
+  tag: "latest"
+extraEnv: []
