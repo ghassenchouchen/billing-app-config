@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: billing-backend
+  namespace: argocd
+spec:
+  generators:
+    - git:
+       repoURL: https://github.com/ghassenchouchen/billing-app-config.git
+       revision: main
+       directories:
+         - path: charts/backend/services/*
+  template:
+    metadata:
+      name: '{{path.basename}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/ghassenchouchen/billing-app-config.git
+        targetRevision: main
+        path: charts/backend
+        helm:
+          valueFiles:
+            - 'services/{{path.basename}}/values.yaml'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: billing-prod
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
