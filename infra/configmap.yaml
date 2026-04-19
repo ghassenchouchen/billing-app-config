@@ -1,5 +1,4 @@
-# Production ConfigMap — shared environment config for all microservices
-# Update the RDS endpoint, Kafka bootstrap, and service URLs when infrastructure is provisioned
+
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -22,9 +21,7 @@ data:
   USAGE_DATASOURCE_URL: "jdbc:mysql://billing-db.cajugww62s1l.us-east-1.rds.amazonaws.com:3306/db_usage?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false"
   BILLING_DATASOURCE_URL: "jdbc:mysql://billing-db.cajugww62s1l.us-east-1.rds.amazonaws.com:3306/db_billing?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false"
 
-  # KAFKA (update with MSK or Bitnami endpoint)
-  KAFKA_BOOTSTRAP_SERVERS: "kafka.billing-prod.svc.cluster.local:29092"
-  SIM_LIFECYCLE_TOPIC: "boutique.sim.lifecycle"
+
 
   # MICROSERVICES (internal cluster DNS)
   AUTH_SERVICE_URL: "http://authentication-service.billing-prod.svc.cluster.local:8087"

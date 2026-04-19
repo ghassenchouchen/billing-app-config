@@ -47,8 +47,12 @@ spec:
             - secretRef:
                 name: billing-secret
           env:
+            {{- if .Values.dbConfigMapKey }}
             - name: SPRING_DATASOURCE_URL
-              value: {{ .Values.datasourceUrl | quote }}
+              valueFrom:
+                configMapKeyRef:
+                  name: billing-config
+                  key: {{ .Values.dbConfigMapKey }}
             - name: SPRING_DATASOURCE_USERNAME
               value: {{ .Values.dbUsername | quote }}
             - name: SPRING_DATASOURCE_PASSWORD
@@ -56,6 +60,9 @@ spec:
                 secretKeyRef:
                   name: billing-secret
                   key: DB_PASSWORD
+            {{- end }}
+            - name: SPRING_CLOUD_COMPATIBILITY_VERIFIER_ENABLED
+              value: "false"
             {{- range .Values.extraEnv }}
             - name: {{ .name }}
               value: {{ .value | quote }}
