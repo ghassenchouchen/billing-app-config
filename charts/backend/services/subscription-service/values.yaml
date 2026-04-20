@@ -3,5 +3,11 @@ port: 8083
 image:
   repository: 005988778995.dkr.ecr.us-east-1.amazonaws.com/billing/subscription-service
   tag: "latest"
-extraEnv: []
 dbConfigMapKey: SUBSCRIPTION_DATASOURCE_URL
+extraEnv:
+  - name: KAFKA_BOOTSTRAP_SERVERS
+    valueFrom: KAFKA_BOOTSTRAP_SERVERS
+  - name: CUSTOMER_SERVICE_URL
+    valueFrom: CUSTOMER_SERVICE_URL
+  - name: CATALOG_SERVICE_URL
+    valueFrom: CATALOG_SERVICE_URL

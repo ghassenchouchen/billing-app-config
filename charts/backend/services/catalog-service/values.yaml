@@ -3,5 +3,7 @@ port: 8082
 image:
   repository: 005988778995.dkr.ecr.us-east-1.amazonaws.com/billing/catalog-service
   tag: "latest"
-extraEnv: []
 dbConfigMapKey: CATALOG_DATASOURCE_URL
+extraEnv:
+  - name: KAFKA_BOOTSTRAP_SERVERS
+    valueFrom: KAFKA_BOOTSTRAP_SERVERS

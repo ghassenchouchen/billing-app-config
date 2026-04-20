@@ -41,11 +41,6 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: {{ .Values.port }}
-          envFrom:
-            - configMapRef:
-                name: billing-config
-            - secretRef:
-                name: billing-secret
           env:
             {{- if .Values.dbConfigMapKey }}
             - name: SPRING_DATASOURCE_URL
@@ -54,18 +49,33 @@ spec:
                   name: billing-config
                   key: {{ .Values.dbConfigMapKey }}
             - name: SPRING_DATASOURCE_USERNAME
-              value: {{ .Values.dbUsername | quote }}
+              valueFrom:
+                configMapKeyRef:
+                  name: billing-config
+                  key: DB_USERNAME
             - name: SPRING_DATASOURCE_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: billing-secret
                   key: DB_PASSWORD
             {{- end }}
+            - name: SPRING_PROFILES_ACTIVE
+              valueFrom:
+                configMapKeyRef:
+                  name: billing-config
+                  key: SPRING_PROFILES_ACTIVE
             - name: SPRING_CLOUD_COMPATIBILITY_VERIFIER_ENABLED
               value: "false"
             {{- range .Values.extraEnv }}
             - name: {{ .name }}
+              {{- if .valueFrom }}
+              valueFrom:
+                configMapKeyRef:
+                  name: billing-config
+                  key: {{ .valueFrom }}
+              {{- else }}
               value: {{ .value | quote }}
+              {{- end }}
             {{- end }}
           readinessProbe:
             httpGet:

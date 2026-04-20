@@ -3,4 +3,18 @@ port: 8090
 image:
   repository: 005988778995.dkr.ecr.us-east-1.amazonaws.com/billing/api-gateway
   tag: "latest"
-extraEnv: []
+extraEnv:
+  - name: AUTH_SERVICE_URL
+    valueFrom: AUTH_SERVICE_URL
+  - name: CUSTOMER_SERVICE_URL
+    valueFrom: CUSTOMER_SERVICE_URL
+  - name: CATALOG_SERVICE_URL
+    valueFrom: CATALOG_SERVICE_URL
+  - name: SUBSCRIPTION_SERVICE_URL
+    valueFrom: SUBSCRIPTION_SERVICE_URL
+  - name: USAGE_SERVICE_URL
+    valueFrom: USAGE_SERVICE_URL
+  - name: BILLING_SERVICE_URL
+    valueFrom: BILLING_SERVICE_URL
+  - name: BOUTIQUE_SERVICE_URL
+    valueFrom: BOUTIQUE_SERVICE_URL

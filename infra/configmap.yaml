@@ -11,6 +11,9 @@ data:
   DB_PORT: "3306"
   DB_USERNAME: "root"
   SPRING_DATASOURCE_OPTIONS: "createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC"
+
+  # KAFKA
+  KAFKA_BOOTSTRAP_SERVERS: "kafka-0.kafka.billing-prod.svc.cluster.local:29092"
   
   # DATASOURCES
   AUTH_DATASOURCE_URL: "jdbc:mysql://billing-db.cajugww62s1l.us-east-1.rds.amazonaws.com:3306/db_authentication?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false"
