@@ -11,6 +11,8 @@ data:
   DB_PORT: "3306"
   DB_USERNAME: "root"
   SPRING_DATASOURCE_OPTIONS: "createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC"
+  SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE: "5"
+
 
   # KAFKA
   KAFKA_BOOTSTRAP_SERVERS: "kafka-0.kafka.billing-prod.svc.cluster.local:29092"

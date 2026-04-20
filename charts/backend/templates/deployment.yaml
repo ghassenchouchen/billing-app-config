@@ -31,10 +31,12 @@ spec:
     spec:
       imagePullSecrets:
         - name: ecr-secret
+      {{- if .Values.dbConfigMapKey }}
       initContainers:
         - name: wait-for-db
           image: busybox:1.36
           command: ['sh', '-c', 'until nc -z {{ .Values.dbHost }} {{ .Values.dbPort }}; do sleep 2; done']
+      {{- end }}
       containers:
         - name: {{ .Values.name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -58,6 +60,11 @@ spec:
                 secretKeyRef:
                   name: billing-secret
                   key: DB_PASSWORD
+            - name: SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE
+              valueFrom:
+                configMapKeyRef:
+                  name: billing-config
+                  key: SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE
             {{- end }}
             - name: SPRING_PROFILES_ACTIVE
               valueFrom:

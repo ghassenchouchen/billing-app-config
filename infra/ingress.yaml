@@ -6,7 +6,6 @@ metadata:
   name: billing-ingress
   namespace: billing-prod
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
 spec:
   ingressClassName: nginx
