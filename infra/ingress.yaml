@@ -6,7 +6,7 @@ metadata:
   name: billing-ingress
   namespace: billing-prod
 spec:
-  ingressClassName: traefik
+  ingressClassName: nginx
   rules:
     - http:
         paths:
