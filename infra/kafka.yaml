@@ -65,6 +65,8 @@ spec:
               value: "true"
             - name: CLUSTER_ID
               value: "MkU3OEVBNTcwNTJENDM2Qk"
+            - name: KAFKA_LOG_DIRS
+              value: "/var/lib/kafka/data/kraft-log"
           resources:
             requests:
               memory: "512Mi"
