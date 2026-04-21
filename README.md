@@ -1,8 +1,8 @@
-# Billing App — GitOps Config Repository
+# PFE App - GitOps Config Repo
 
-This repository holds the **Kubernetes desired state** for the billing application. It is:
+This repository holds the **Kubernetes desired state** for the billing pfeapplication. It is:
 - **Updated by Jenkins** after every successful CI build (image tag changes)
-- **Watched by ArgoCD** which automatically deploys changes to the EKS cluster
+- **Observed by ArgoCD** which automatically deploys changes to the EKS cluster
 
 ## Structure
 
@@ -12,7 +12,7 @@ This repository holds the **Kubernetes desired state** for the billing applicati
 │   │   ├── Chart.yaml
 │   │   ├── values.yaml    # Shared defaults (probes, resources, namespace)
 │   │   ├── templates/
-│   │   │   └── deployment.yaml   # Generic template
+│   │   │   └── deployment.yaml   
 │   │   └── services/
 │   │       ├── api-gateway/values.yaml
 │   │       ├── authentication-service/values.yaml
@@ -27,17 +27,18 @@ This repository holds the **Kubernetes desired state** for the billing applicati
 │       ├── values.yaml
 │       └── templates/
 │           └── deployment.yaml
-└── infra/
-    ├── ingress.yaml       # NGINX Ingress routing rules
-    ├── configmap.yaml     # Shared environment config (DB URLs, Kafka, etc.)
-    └── secret.yaml        # Sensitive values (use Sealed Secrets in prod)
+├── infra
+│   ├── configmap.yaml         #shared environment config (DB urls)
+│   ├── ingress.yaml           #NGINX ingress routing rules   
+│   ├── kafka.yaml             #kafka service & statefulset configuration
+│   └── sealedsecret.yaml      #Encrypted sensitive information
 ```
 
-## How Jenkins Updates This Repo
+
 
 After a successful build, Jenkins:
 1. Clones this repository
-2. Updates the `image.tag` field in the relevant `services/<name>/values.yaml`
+2. Updates the `image.tag` field in the `services/<name>/values.yaml` #Example: service/authentication-service/values.yaml
 3. Commits and pushes the change
 
 ArgoCD detects the new commit and automatically rolls out the updated image to EKS.

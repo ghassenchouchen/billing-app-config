@@ -29,8 +29,6 @@ spec:
       labels:
         app: {{ .Values.name }}
     spec:
-      imagePullSecrets:
-        - name: ecr-secret
       {{- if .Values.dbConfigMapKey }}
       initContainers:
         - name: wait-for-db
