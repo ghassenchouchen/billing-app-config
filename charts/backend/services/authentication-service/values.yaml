@@ -7,3 +7,6 @@ dbConfigMapKey: AUTH_DATASOURCE_URL
 extraEnv:
   - name: BOUTIQUE_SERVICE_URL
     valueFrom: BOUTIQUE_SERVICE_URL
+extraSecretEnv:
+  - name: JWT_SECRET
+    key: JWT_SECRET

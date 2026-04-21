@@ -18,7 +18,7 @@ spec:
                 name: frontend
                 port:
                   number: 80
-          # API Gateway — all backend API calls
+          # API Gateway - all backend API calls
           - path: /api
             pathType: Prefix
             backend:

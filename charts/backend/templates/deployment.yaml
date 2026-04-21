@@ -84,6 +84,13 @@ spec:
               value: {{ .value | quote }}
               {{- end }}
             {{- end }}
+            {{- range .Values.extraSecretEnv }}
+            - name: {{ .name }}
+              valueFrom:
+                secretKeyRef:
+                  name: billing-secret
+                  key: {{ .key }}
+            {{- end }}
           readinessProbe:
             httpGet:
               path: /actuator/health
