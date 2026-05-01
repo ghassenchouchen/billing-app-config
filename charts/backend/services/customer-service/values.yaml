@@ -2,7 +2,7 @@ name: customer-service
 port: 8081
 image:
   repository: 005988778995.dkr.ecr.us-east-1.amazonaws.com/billing/customer-service
-  tag: "10"
+  tag: "11"
 dbConfigMapKey: CUSTOMER_DATASOURCE_URL
 extraEnv:
   - name: KAFKA_BOOTSTRAP_SERVERS
