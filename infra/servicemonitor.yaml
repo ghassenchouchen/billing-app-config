@@ -1,0 +1,20 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: billing-backend-monitor
+  namespace: billing-prod
+  labels:
+    release: monitoring 
+spec:
+  namespaceSelector:
+    matchNames:
+      - billing-prod
+  # Select ALL services that have an "app" label
+  selector:
+    matchExpressions:
+      - key: app
+        operator: Exists
+  endpoints:
+    - port: web
+      path: /actuator/prometheus
+      interval: 15s
