@@ -2,7 +2,7 @@ name: authentication-service
 port: 8087
 image:
   repository: 005988778995.dkr.ecr.us-east-1.amazonaws.com/billing/authentication-service
-  tag: "11"
+  tag: "12"
 dbConfigMapKey: AUTH_DATASOURCE_URL
 extraEnv:
   - name: BOUTIQUE_SERVICE_URL

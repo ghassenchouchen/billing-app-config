@@ -2,7 +2,7 @@ name: usage-service
 port: 8084
 image:
   repository: 005988778995.dkr.ecr.us-east-1.amazonaws.com/billing/usage-service
-  tag: "11"
+  tag: "12"
 dbConfigMapKey: USAGE_DATASOURCE_URL
 extraEnv:
   - name: KAFKA_BOOTSTRAP_SERVERS
