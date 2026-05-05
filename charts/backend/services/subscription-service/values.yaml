@@ -2,7 +2,7 @@ name: subscription-service
 port: 8083
 image:
   repository: 005988778995.dkr.ecr.us-east-1.amazonaws.com/billing/subscription-service
-  tag: "12"
+  tag: "13"
 dbConfigMapKey: SUBSCRIPTION_DATASOURCE_URL
 extraEnv:
   - name: KAFKA_BOOTSTRAP_SERVERS
