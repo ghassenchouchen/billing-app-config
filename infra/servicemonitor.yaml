@@ -21,5 +21,4 @@ spec:
       relabelings:
         - sourceLabels: [__meta_kubernetes_service_label_app]
           targetLabel: job
-        - sourceLabels: [__meta_kubernetes_service_label_app]
-          targetLabel: service
+
